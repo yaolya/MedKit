@@ -30,6 +30,7 @@ trade_name | VARCHAR(50) | NOT NULL
 expiration_date | DATE | NOT NULL
 marketing_id | SERIAL | NOT NULL
 manufacturer_id | SERIAL | NOT NULL
+
 PRIMARY KEY(name, series, serial number)
 
 ### manufacturer
