@@ -1,5 +1,10 @@
 # Описание
-Веб-приложение, позволяющее отслеживать наличие/отсутствие у пользователя медицинских препаратов, их случаи применения, срок годности для оптимального ведения домашней аптечки. 
+Веб-приложение, позволяющее отслеживать наличие/отсутствие у пользователя медицинских препаратов, всю небходимую информацию о них (срок годности, лекарственную форму, противопоказания, случаи применения, место и температуру хранения, побочные эффекты, способы применения и т. д.), распределять по категориям, создавать списки покупок для оптимального ведения домашней аптечки. 
+
+При покупке медикамента пользователь ищет его в базе и добавляет к себе в 'аптечку'. Срок годности вводится вручную и отслеживается приложением. При приближении окончания срока пользователю приходит напоминание. Если препарат заканчивается, пользователь также отмечает это в приложении. 
+
+Препараты можно распределять по существующим категориям ('в поездку', 'всегда с собой',...) или создавать собственные (например, под конкретные заболевания).
+У пользователей есть возможность составлять списки покупок, чтобы сразу добавлять в них закончившиеся препараты и препараты с вышедшим сроком годности.
 ## Наименование
 MedKit
 ## Предметная область
@@ -16,8 +21,11 @@ contraindications | TEXT |
 side_effects | TEXT | 
 mode_of_application | TEXT | 
 driving | BOOL | 
+in_list | BOOL | 
 storage_temperature | INT | 
 prescriprtion_required | BOOL | 
+marketing_id | SERIAL | NOT NULL
+manufacturer_id | SERIAL | NOT NULL
 
 ### product
 name | type | constraints
@@ -28,10 +36,8 @@ medicament_reg_num | CHAR(12) | NOT NULL
 gtin_number | VARCHAR(20) | 
 trade_name | VARCHAR(50) | NOT NULL
 expiration_date | DATE | NOT NULL
-marketing_id | SERIAL | NOT NULL
-manufacturer_id | SERIAL | NOT NULL
 
-PRIMARY KEY(name, series, serial number)
+PRIMARY KEY(series, serial number)
 
 ### manufacturer
 name | type | constraints
@@ -57,7 +63,6 @@ street_name | VARCHAR(50) |
 postal_code | VARCHAR(10) | 
 phone_number | VARCHAR(12) | UNIQUE
 website | VARCHAR(100) | UNIQUE
-
 
 ### disease
 name | type | constraints
@@ -99,6 +104,19 @@ name | type | constraints
 medicament_reg_num | CHAR(12) | NOT NULL
 dosage_form_id | SERIAL | NOT NULL
 
+### categories of medicaments
+(в какие категории входят препараты)
+name | type | constraints
+--- | --- | ---
+medicament_reg_num | CHAR(12) | NOT NULL
+category_id | SERIAL | NOT NULL
+
+### category
+name | type | constraints
+--- | --- | ---
+category_id | SERIAL | NOT NULL PRIMARY KEY
+category_name | VARCHAR(100) | NOT NULL
+
 ### user
 name | type | constraints
 --- | --- | ---
@@ -108,13 +126,13 @@ password | VARCHAR(50) | NOT NULL
 is_admin | BOOL | NOT NULL
 
 ## Общие ограничения целостности
-- Связь `many to many`: `medicament` и `disease`, `symptoms` и `disease`, `medicament` и `dosage_form`.
+- Связь `many to many`: `medicament` и `disease`, `symptoms` и `disease`, `medicament` и `dosage_form`, `medicament` и `category`.
 - Связь `one to many`: `medicament` и `product`.
-- Связь `one to one`: `product` и `manufacturer`, `product` и `marketing authorisation holder`, `manufacturer` и `address`, `marketing authorisation holder` и `address`.
+- Связь `one to one`: `medicament` и `manufacturer`, `medicament` и `marketing authorisation holder`, `manufacturer` и `address`, `marketing authorisation holder` и `address`.
 
 # Пользовательские роли
-- user (кол-во: не ограничено): поиск по базе лекарственных препаратов, выбор медикаментов, добавление к себе.
-- оператор базы данных (кол-во: от 1): добавление/редактирование/удаление препаратов.
+- user (кол-во: не ограничено): поиск по базе лекарственных препаратов, выбор медикаментов, добавление к себе, создание/удаление категорий, распределение по категориям, изменение списка покупок.
+- оператор базы данных (кол-во: от 1): добавление/редактирование/удаление препаратов; добавление/удаление категорий, существующих по умолчанию.
 
 # UI/API
 - UI: React.js
@@ -127,5 +145,4 @@ SQL, HTML, CSS, Javascript
 PostgreSQL
 
 # ER Diagram
-![e879a4be64433513ecdd060a2e24cb2fccb1a08a597036415205170a4122d144](https://user-images.githubusercontent.com/61321903/138564776-b3245d21-1c15-4556-82db-1d1517192f28.png)
-
+![ER Diagram blank](https://user-images.githubusercontent.com/61321903/138951922-cbb932a1-e4d9-4b4f-ae0a-1b708424fd7c.png)
