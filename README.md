@@ -14,6 +14,7 @@ MedKit
 name | type | constraints
 --- | --- | ---
 medicament_reg_num | CHAR(12) | NOT NULL PRIMARY KEY
+trade_name | VARCHAR(50) | NOT NULL
 inn | VARCHAR(50) | NOT NULL
 atc_code | CHAR(7) | NOT NULL
 pharm_properties | TEXT | 
@@ -34,8 +35,8 @@ series | INT | NOT NULL
 serial_number | VARCHAR(20) | NOT NULL
 medicament_reg_num | CHAR(12) | NOT NULL
 gtin_number | VARCHAR(20) | 
-trade_name | VARCHAR(50) | NOT NULL
 expiration_date | DATE | NOT NULL
+user_id | SERIAL | NOT NULL
 
 PRIMARY KEY(series, serial number)
 
@@ -116,6 +117,7 @@ name | type | constraints
 --- | --- | ---
 category_id | SERIAL | NOT NULL PRIMARY KEY
 category_name | VARCHAR(100) | NOT NULL
+user_id | SERIAL | NOT NULL
 
 ### user
 name | type | constraints
@@ -125,9 +127,16 @@ login | VARCHAR(50) | NOT NULL
 password | VARCHAR(50) | NOT NULL
 is_admin | BOOL | NOT NULL
 
+### user's list
+(препараты, которые пользователь добавляет в список покупок)
+name | type | constraints
+--- | --- | ---
+medicament_reg_num | CHAR(12) | NOT NULL
+user_id | SERIAL | NOT NULL
+
 ## Общие ограничения целостности
-- Связь `many to many`: `medicament` и `disease`, `symptoms` и `disease`, `medicament` и `dosage_form`, `medicament` и `category`.
-- Связь `one to many`: `medicament` и `product`.
+- Связь `many to many`: `medicament` и `disease`, `symptoms` и `disease`, `medicament` и `dosage_form`, `medicament` и `category`, `user` и `medicament`.
+- Связь `one to many`: `medicament` и `product`, `user` и `category`, `user` и `product`.
 - Связь `one to one`: `medicament` и `manufacturer`, `medicament` и `marketing authorisation holder`, `manufacturer` и `address`, `marketing authorisation holder` и `address`.
 
 # Пользовательские роли
@@ -145,4 +154,4 @@ SQL, HTML, CSS, Javascript
 PostgreSQL
 
 # ER Diagram
-![ER Diagram blank](https://user-images.githubusercontent.com/61321903/138951922-cbb932a1-e4d9-4b4f-ae0a-1b708424fd7c.png)
+![ER Diagram blank](https://user-images.githubusercontent.com/61321903/139066487-eda554c8-2e58-4725-8e75-b991244187cf.png)
