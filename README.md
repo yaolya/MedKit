@@ -32,12 +32,18 @@ manufacturer_id | SERIAL | NOT NULL
 name | type | constraints
 --- | --- | ---
 product_id | SERIAL | NOT NULL PRIMARY KEY
-series | INT | NULLABLE
-serial_number | VARCHAR(20) | NULLABLE
+series | INT | NOT NULL
+serial_number | VARCHAR(20) | NOT NULL
 medicament_reg_num | CHAR(12) | NOT NULL
-expiration_date | DATE | NULLABLE
-in_list | BOOL | NOT NULL
+expiration_date | DATE | NOT NULL
 user_id | SERIAL | NOT NULL
+
+### user's list
+name | type | constraints
+--- | --- | ---
+user_id | SERIAL | NOT NULL
+medicament_reg_num | CHAR(12) | NOT NULL
+quantity | INT | NOT NULL
 
 ### manufacturer
 name | type | constraints
@@ -146,4 +152,4 @@ SQL, HTML, CSS, Javascript
 PostgreSQL
 
 # ER Diagram
-![ER Diagram blank](https://user-images.githubusercontent.com/61321903/139266047-18d63d55-cc8e-48c3-ab4d-87e9153b23d1.png)
+![ER Diagram blank](https://user-images.githubusercontent.com/61321903/139284135-439b59dd-fd46-4c60-85e2-b92e646cef2f.png)
