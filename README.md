@@ -15,6 +15,7 @@ name | type | constraints
 --- | --- | ---
 medicament_reg_num | CHAR(12) | NOT NULL PRIMARY KEY
 trade_name | VARCHAR(50) | NOT NULL
+img_url | VARCHAR(150) |
 inn | VARCHAR(50) | NOT NULL
 atc_code | CHAR(7) | NOT NULL
 pharm_properties | TEXT | 
@@ -22,7 +23,6 @@ contraindications | TEXT |
 side_effects | TEXT | 
 mode_of_application | TEXT | 
 driving | BOOL | 
-in_list | BOOL | 
 storage_temperature | INT | 
 prescriprtion_required | BOOL | 
 marketing_id | SERIAL | NOT NULL
@@ -31,14 +31,13 @@ manufacturer_id | SERIAL | NOT NULL
 ### product
 name | type | constraints
 --- | --- | ---
-series | INT | NOT NULL
-serial_number | VARCHAR(20) | NOT NULL
+product_id | SERIAL | NOT NULL PRIMARY KEY
+series | INT | NULLABLE
+serial_number | VARCHAR(20) | NULLABLE
 medicament_reg_num | CHAR(12) | NOT NULL
-gtin_number | VARCHAR(20) | 
-expiration_date | DATE | NOT NULL
+expiration_date | DATE | NULLABLE
+in_list | BOOL | NOT NULL
 user_id | SERIAL | NOT NULL
-
-PRIMARY KEY(series, serial number)
 
 ### manufacturer
 name | type | constraints
@@ -127,15 +126,8 @@ login | VARCHAR(50) | NOT NULL
 password | VARCHAR(50) | NOT NULL
 is_admin | BOOL | NOT NULL
 
-### user's list
-(препараты, которые пользователь добавляет в список покупок)
-name | type | constraints
---- | --- | ---
-medicament_reg_num | CHAR(12) | NOT NULL
-user_id | SERIAL | NOT NULL
-
 ## Общие ограничения целостности
-- Связь `many to many`: `medicament` и `disease`, `symptoms` и `disease`, `medicament` и `dosage_form`, `medicament` и `category`, `user` и `medicament`.
+- Связь `many to many`: `medicament` и `disease`, `symptoms` и `disease`, `medicament` и `dosage_form`, `medicament` и `category`.
 - Связь `one to many`: `medicament` и `product`, `user` и `category`, `user` и `product`.
 - Связь `one to one`: `medicament` и `manufacturer`, `medicament` и `marketing authorisation holder`, `manufacturer` и `address`, `marketing authorisation holder` и `address`.
 
@@ -154,4 +146,4 @@ SQL, HTML, CSS, Javascript
 PostgreSQL
 
 # ER Diagram
-![ER Diagram blank](https://user-images.githubusercontent.com/61321903/139066487-eda554c8-2e58-4725-8e75-b991244187cf.png)
+![ER Diagram blank](https://user-images.githubusercontent.com/61321903/139266047-18d63d55-cc8e-48c3-ab4d-87e9153b23d1.png)
