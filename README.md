@@ -123,6 +123,7 @@ name | type | constraints
 --- | --- | ---
 category_id | SERIAL | NOT NULL PRIMARY KEY
 category_name | VARCHAR(100) | NOT NULL
+category_description | TEXT |
 user_id | SERIAL | NOT NULL
 
 ### user
