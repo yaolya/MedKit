@@ -78,8 +78,8 @@ user_id | Integer | NOT NULL
 name | type | constraints
 --- | --- | ---
 user_id | Integer | NOT NULL PRIMARY KEY
-login | String(50) | NOT NULL
-password | String(50) | NOT NULL
+name | String(50) | NOT NULL
+email | String(50) | NOT NULL
 is_admin | Boolean | NOT NULL
 
 ## Общие ограничения целостности
