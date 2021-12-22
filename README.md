@@ -24,6 +24,8 @@ driving | Boolean |
 storage_temperature | Integer | 
 prescriprtion_required | Boolean | 
 manufacturer_id | Integer | NOT NULL
+image_name | String(100) | NOT NULL
+image_data | LargeBinary | NOT NULL
 
 ### product
 name | type | constraints
@@ -38,7 +40,6 @@ name | type | constraints
 --- | --- | ---
 user_id | Integer | NOT NULL
 medicament_id | Integer | NOT NULL
-quantity | Integer | NOT NULL
 
 ### manufacturer
 name | type | constraints
@@ -72,6 +73,7 @@ name | type | constraints
 category_id | Integer | NOT NULL PRIMARY KEY
 category_name | String(100) | NOT NULL
 category_description | Text |
+is_default | Boolean | NOT NULL
 user_id | Integer | NOT NULL
 
 ### user
@@ -102,4 +104,4 @@ SQL, HTML, CSS, Javascript, Python
 PostgreSQL
 
 # ER Diagram
-![ER Diagram blank](https://user-images.githubusercontent.com/61321903/139284135-439b59dd-fd46-4c60-85e2-b92e646cef2f.png)
+![er diagram](https://user-images.githubusercontent.com/61321903/147168012-c5993c43-cf38-47a8-9250-8337f98d171b.png)
