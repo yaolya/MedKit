@@ -1,0 +1,121 @@
+﻿<!DOCTYPE ISSPECS SYSTEM "https://raw.githubusercontent.com/77maxikov/db_course/master/ISSpecs.dtd">
+<ISSPECS>
+	<DESCRIPTION>
+		<TITLE>MedKit</TITLE>
+		<SUBJ>Medicine</SUBJ>
+	</DESCRIPTION>
+	<DATA>
+		<ENTITY ent_id="medicament">
+			<PROPERTY>medicament_id</PROPERTY>
+			<PROPERTY>name</PROPERTY>
+			<PROPERTY>contraindications</PROPERTY>
+			<PROPERTY>side_effects</PROPERTY>
+			<PROPERTY>mode_of_application</PROPERTY>
+			<PROPERTY>driving</PROPERTY>
+			<PROPERTY>storage_temperature</PROPERTY>
+			<PROPERTY>prescription_required</PROPERTY>
+			<PROPERTY>manufacturer_id</PROPERTY>
+			<PROPERTY>image_data</PROPERTY>
+			<PROPERTY>image_name</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="product">
+			<PROPERTY>product_id</PROPERTY>
+			<PROPERTY>medicament_id</PROPERTY>
+			<PROPERTY>expiration_date</PROPERTY>
+			<PROPERTY>user_id</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="medicaments_users">
+			<PROPERTY>medicament_id</PROPERTY>
+			<PROPERTY>user_id</PROPERTY>
+			<PROPERTY>category_id</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="manufacturer">
+			<PROPERTY>manufacturer_id</PROPERTY>
+			<PROPERTY>manufacturer_name</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="disease">
+			<PROPERTY>disease_id</PROPERTY>
+			<PROPERTY>disease_name</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="medicaments_diseases">
+			<PROPERTY>disease_id</PROPERTY>
+			<PROPERTY>medicament_reg_num</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="medicaments_categories">
+			<PROPERTY>medicament_id</PROPERTY>
+			<PROPERTY>category_id</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="category">
+			<PROPERTY>category_id</PROPERTY>
+			<PROPERTY>category_name</PROPERTY>
+			<PROPERTY>category_description</PROPERTY>
+			<PROPERTY>is_default</PROPERTY>
+			<PROPERTY>user_id</PROPERTY>
+		</ENTITY>
+		<ENTITY ent_id="user">
+			<PROPERTY>user_id</PROPERTY>
+			<PROPERTY>name</PROPERTY>
+			<PROPERTY>email</PROPERTY>
+			<PROPERTY>is_admin</PROPERTY>
+		</ENTITY>
+		<RELATIONSHIP ent_ids="medicament disease">
+			<PROPERTY>many to many</PROPERTY>
+		</RELATIONASHIP>
+		<RELATIONSHIP ent_ids="medicament category">
+			<PROPERTY>many to many</PROPERTY>
+		</RELATIONASHIP>
+		<RELATIONSHIP ent_ids="medicament product">
+			<PROPERTY>one to many</PROPERTY>
+		</RELATIONASHIP>
+		<RELATIONSHIP ent_ids="user category">
+			<PROPERTY>one to many</PROPERTY>
+		</RELATIONASHIP>
+		<RELATIONSHIP ent_ids="user product">
+			<PROPERTY>one to many</PROPERTY>
+		</RELATIONASHIP>
+		<RELATIONSHIP ent_ids="medicament manufacturer">
+			<PROPERTY>one to one</PROPERTY>
+		</RELATIONASHIP>
+		<CONSTRAINT>
+        Продукты являются торговыми единицами препаратов
+        </CONSTRAINT>
+	</DATA>
+	<ROLES>
+		<ROLE>
+			<TITLE>user</TITLE>
+			<RESPONSIBILITY>поиск по базе лекарственных препаратов</RESPONSIBILITY>
+			<RESPONSIBILITY>выбор медикаментов</RESPONSIBILITY>
+			<RESPONSIBILITY>добавление медикаментов к себе</RESPONSIBILITY>
+			<RESPONSIBILITY>создание категорий</RESPONSIBILITY>
+			<RESPONSIBILITY>удаление категорий</RESPONSIBILITY>
+			<RESPONSIBILITY>распределение медикаментов по категориям</RESPONSIBILITY>
+			<RESPONSIBILITY>изменение списка покупок</RESPONSIBILITY>
+			<TOTALUSERS>не ограничено</TOTALUSERS>
+		</ROLE>
+		<ROLE>
+			<TITLE>operator</TITLE>
+			<RESPONSIBILITY>добавление препаратов</RESPONSIBILITY>
+			<RESPONSIBILITY>редактирование препаратов</RESPONSIBILITY>
+			<RESPONSIBILITY>удаление препаратов</RESPONSIBILITY>
+			<RESPONSIBILITY>добавление категорий, существующих по умолчанию</RESPONSIBILITY>
+			<RESPONSIBILITY>удаление категорий, существующих по умолчанию</RESPONSIBILITY>
+			<TOTALUSERS>от 1</TOTALUSERS>
+		</ROLE>
+	</ROLES>
+	<TECHSPEC>
+		<TYPE>Interface App</TYPE>
+		<DEVTOOLS>
+			<DEV>React</DEV>
+			<DEV>Python Flask</DEV>
+		</DEVTOOLS>
+		<DBMS>
+			<TITLE>PostgreSQL</TITLE>
+			<VERSION>14</VERSION>
+			<REASONING>поддержка БД неограниченного размера;
+            надёжные механизмы транзакций;
+            расширяемая система встроенных языков программирования;
+            расширяемость.</REASONING>
+		</DBMS>
+	</TECHSPEC>
+</ISSPECS>
+
