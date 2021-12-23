@@ -66,6 +66,7 @@ name | type | constraints
 --- | --- | ---
 medicament_id | Integer | NOT NULL
 category_id | Integer | NOT NULL
+user_id | Integer| NOT NULL
 
 ### category
 name | type | constraints
