@@ -105,4 +105,4 @@ SQL, HTML, CSS, Javascript, Python
 PostgreSQL
 
 # ER Diagram
-![er diagram](https://user-images.githubusercontent.com/61321903/147168012-c5993c43-cf38-47a8-9250-8337f98d171b.png)
+![er diagram](https://user-images.githubusercontent.com/61321903/147204516-0db3d864-5703-4992-9477-ee65f683c82e.png)
